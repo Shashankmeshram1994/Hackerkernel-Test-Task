@@ -1,0 +1,19 @@
+Apex class for Task Link - ttps://docs.google.com/document/d/18y-9vn9_Iz_qndL-rVbA49KzhfXAwWJoA49fd0myMjQ/edit?usp=sharing
+
+Apex Code: 
+public with sharing class TaskController {
+    @AuraEnabled(cacheable=true)
+    public static List<Task__c> getTasks() {
+        return [SELECT Id, Name, Due_Date__c, Description__c, Priority__c, Status__c, Assigned_To__r.Name from Task__c];
+    }
+    
+    @AuraEnabled
+    public static boolean createNewTask(Task__c objTask) {
+        
+        if (objTask != null ) {
+      
+            insert objTask;
+        }
+        return true;
+    }
+}
